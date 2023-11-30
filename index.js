@@ -10,9 +10,11 @@ const url = `http://api.openweathermap.org/geo/1.0/direct?q=${q}&appid=${appid}&
 async function gerarCoordenadas(url) {
     try {
         const {data} = await axios.get(url);
-        console.log(
-                `${`A longitude de ` + q + ` é ` + data[0].lon} ${ `e a latitude é ` + data[0].lat}. `
-        );
+        console.log(`
+                ${`Cidade: ` + q}
+                ${`Longitude: ` + data[0].lon}
+                ${`Latitude: ` + data[0].lat} 
+                `);
         return { lon: data[0].lon, lat: data[0].lat};
     }catch (error){
         console.error('Erro ao gerar coordenadas:', error.message);
@@ -27,9 +29,10 @@ async function gerarTemperatura(lon, lat){
         );
         const feels_like = data.main.feels_like - 273.15;
         const description = data.weather[0].description;
-        console.log(
-            `A sensação térmica é de: ${feels_like.toFixed(2)} °C e a descrição correspondente é: ${description}`
-        );
+        console.log(`
+                Sensação térmica: ${feels_like.toFixed(2)} °C
+                Descrição: ${description}
+            `);
     }catch (error){
         console.error('Erro ao gerar a sensação térmica:', error.message);
     }
